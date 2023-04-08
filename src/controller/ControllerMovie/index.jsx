@@ -64,7 +64,7 @@ export const UseMovieContext = () => {
     return setMovie(movie);
   }
 
-  const selectGenre = (genre, id, selectedGenre, page,) => {
+  const selectGenre = (genre, id, page,) => {
     setId(id - 1 <= 0 ? 0 : id - 1)
     history(`/${id}/${page}`)
     return setMoviesGenre(genre)

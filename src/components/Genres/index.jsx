@@ -5,9 +5,10 @@ import { Button, ButtonPage, Container, ContainerPages, MainContainer } from "./
 import { GrNext, GrPrevious } from 'react-icons/gr'
 import { Api } from "../../services";
 import { Menu } from "../Menu";
+import { useParams } from "react-router-dom";
 
 export const MoviesGenre = () => {
-  const { moviesGenre, selectMovie, page, setPage, nextPage, previousPage, id, selectGenre } = UseMovieContext();
+  const { moviesGenre, selectMovie, page, setPage, nextPage, previousPage, selectGenre } = UseMovieContext();
   const [totalPages, setTotalPages] = useState();
   
   const MAX_BUTTONS = 5;
@@ -33,6 +34,8 @@ export const MoviesGenre = () => {
     return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   }
   
+  const { idGenre } = useParams();
+  const id = parseInt(idGenre - 1)
   useEffect(() => {
     const loadAll = async () => {
       const list = await Api.getHomeList(page);
@@ -40,9 +43,8 @@ export const MoviesGenre = () => {
       setTotalPages(list[id].items.data.total_pages)
     }
     loadAll()
-    console.log(id, page)
   }, [page])
-  
+
   return(
     <div>
       <Menu />
