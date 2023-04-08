@@ -59,12 +59,12 @@ export const UseMovieContext = () => {
   
   const selectMovie = (movie) => {
     console.log(movie)
-    history(`/movie/${movie.title}`)
+    history(`/movie/${movie.id}`)
     setMediaType(movie.media_type ?? 'movie')
-    return setMovie(movie);
+    setMovie(movie);
   }
 
-  const selectGenre = (genre, id, page,) => {
+  const selectGenre = (genre, id, page) => {
     setId(id - 1 <= 0 ? 0 : id - 1)
     history(`/${id}/${page}`)
     return setMoviesGenre(genre)

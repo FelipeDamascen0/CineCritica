@@ -39,7 +39,7 @@ export const MoviesGenre = () => {
   useEffect(() => {
     const loadAll = async () => {
       const list = await Api.getHomeList(page);
-      selectGenre(list[id].items.data.results, list[id].id, list[id].title, page)
+      selectGenre(list[id].items.data.results, list[id].id, page)
       setTotalPages(list[id].items.data.total_pages)
     }
     loadAll()

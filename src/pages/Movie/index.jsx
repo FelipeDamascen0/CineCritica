@@ -5,23 +5,25 @@ import { ContainerDetails, ContainerInput, ContainerMovie, Details, MainContaine
 import { InputRating } from "../../components/InputRating";
 import Star from '@mui/icons-material/Star';
 import { Menu } from "../../components/Menu";
+import { useParams } from "react-router-dom";
 
 export const Movie = () => {
   const { movie, mediaType } = UseMovieContext();
   const [video, setVideo] = useState();
   const [trailerUnvailable, setTrailerUnvaiable] = useState(false);
 
+  const { idMovie } = useParams();
+  console.log(idMovie)
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/${mediaType}/${movie.id}/videos?api_key=769b0eb2ecaa9ef5b9707f80f43c6c63&language=en-US`)
+    axios.get(`https://api.themoviedb.org/3/${mediaType}/${idMovie}/videos?api_key=769b0eb2ecaa9ef5b9707f80f43c6c63&language=en-US`)
     .then((response) => {
       if(response.data.results.length <= 0){
         setTrailerUnvaiable(!trailerUnvailable)
       }
       response.data.results.map((item) => item.type === 'Trailer' ? setVideo(item.key) : '')
     })
-  }, [])
+  }, [idMovie, mediaType])
 
-  console.log(movie)
   return(
     <div>
       <Menu />
